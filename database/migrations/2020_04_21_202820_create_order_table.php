@@ -16,12 +16,14 @@ class CreateOrdersTable extends Migration
         Schema::create('order', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('order_type');
+            $table->unsignedBigInteger('order_type_id');
             $table->double('total');
             $table->text('note');
             $table->unsignedBigInteger('payment_id');
             $table->unsignedBigInteger('status_id');
             $table->timestamps();
+
+            $table->foreign('order_type_id')->references('id')->on('order_types');
         });
     }
 
