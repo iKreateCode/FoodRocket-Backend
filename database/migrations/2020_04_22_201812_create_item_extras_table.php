@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateExtraCategoriesTable extends Migration
+class CreateItemExtrasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateExtraCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('extra_categories', function (Blueprint $table) {
-            $table->id();
-            $table->string('name', 100);
-            $table->text('description');
-            $table->mediumText('image');
+        Schema::create('item_extras', function (Blueprint $table) {
+            $table->unsignedBigInteger('item_id');
+            $table->unsignedBigInteger('category_id');
+            $table->double('price')->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ class CreateExtraCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('extra_categories');
+        Schema::dropIfExists('item_extras');
     }
 }

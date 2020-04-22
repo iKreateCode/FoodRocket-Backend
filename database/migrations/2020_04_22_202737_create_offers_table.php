@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateExtraCategoriesTable extends Migration
+class CreateOffersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateExtraCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('extra_categories', function (Blueprint $table) {
+        Schema::create('offers', function (Blueprint $table) {
             $table->id();
             $table->string('name', 100);
             $table->text('description');
-            $table->mediumText('image');
+            $table->double('price');
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateExtraCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('extra_categories');
+        Schema::dropIfExists('offers');
     }
 }
