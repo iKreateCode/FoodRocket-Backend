@@ -19,7 +19,7 @@ class CreateMenuItemsTable extends Migration
             $table->text('description');
             $table->unsignedBigInteger('category_id');
             $table->double('price');
-            $table->mediumText('image');
+            $table->mediumText('image_url');
             $table->timestamps();
 
             $table->foreign('category_id')->references('id')->on('item_categories');
