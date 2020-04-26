@@ -12,6 +12,6 @@ class Extras extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'description', 'category_id', 'price', 'image',
+        'name', 'description', 'category_id', 'price', 'image_url',
     ];
 }

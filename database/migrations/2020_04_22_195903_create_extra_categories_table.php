@@ -17,7 +17,7 @@ class CreateExtraCategoriesTable extends Migration
             $table->id();
             $table->string('name', 100);
             $table->text('description');
-            $table->mediumText('image');
+            $table->mediumText('image_url');
             $table->timestamps();
         });
     }
