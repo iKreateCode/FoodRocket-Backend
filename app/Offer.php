@@ -14,4 +14,10 @@ class Offer extends Model
     protected $fillable = [
         'name', 'description', 'price',
     ];
+
+    protected $hidden = ['created_at', 'updated_at'];
+
+    public function offerItems() {
+        return $this->hasMany('App\OfferItem', 'offer_id');
+    }
 }
