@@ -17,9 +17,11 @@ Route::prefix('v1')->group(function () {
     Route::post('user/login', 'API\UserController@login');
     Route::post('user/register', 'API\UserController@register');
 
-    Route::group(['middleware' => 'auth:api'], function(){
+    Route::resource('menu', 'MenuController')->except([
+        'create', 'store', 'show', 'edit', 'update', 'destroy']
+    );
+
+    Route::group(['middleware' => 'auth:api'], function() {
         Route::post('user', 'API\UserController@detail');
-        Route::resource('menu', 'MenuController')->except([
-            'create', 'store', 'show', 'edit', 'update', 'destroy']);
-        });
+    });
 });
