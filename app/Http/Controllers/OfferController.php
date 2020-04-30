@@ -20,7 +20,7 @@ class OfferController extends Controller
         foreach ($offers as $offer) {
             $offer_items = $offer->offerItems()->get(); // Get Offer Items
             foreach ($offer_items as $offer_item) {
-                $offer_item->item = $offer_item->item()->get(); // Get Menu Item
+                $offer_item->item = $offer_item->item()->first(); // Get Menu Item
             }
             $offer->offer_items = $offer_items;
         }
