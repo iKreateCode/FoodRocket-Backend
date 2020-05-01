@@ -20,8 +20,8 @@ class CreateOrderItemsTable extends Migration
             $table->unsignedBigInteger('offer_id')->nullable();
             $table->integer('quantity');
             $table->text('note');
-            $table->timestamps();
 
+            $table->timestamps();
             $table->foreign('order_id')->references('id')->on('orders');
             $table->foreign('item_id')->references('id')->on('menu_items');
             $table->foreign('offer_id')->references('id')->on('offers');
