@@ -20,7 +20,7 @@ class OrderController extends Controller
     {
         $orders = Order::where('user_id', \Auth::user()->id)->get();
         foreach ($orders as $order) {
-            $order->items = OrderItem::where('order_id', $order->id)->get();
+            $order->item = OrderItem::where('order_id', $order->id)->first();
         }
         return response()->json(['success' => $orders], $this-> successStatus);
     }
