@@ -27,5 +27,7 @@ Route::prefix('v1')->group(function () {
 
     Route::group(['middleware' => 'auth:api'], function() {
         Route::post('user', 'API\UserController@detail');
+
+        Route::resource('order', 'OrderController');
     });
 });
