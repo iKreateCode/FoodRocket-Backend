@@ -23,13 +23,6 @@ class OrderController extends Controller
         foreach ($orders as $order) {
             $order->item = OrderItem::where('order_id', $order->id)->first();
         }
-
-        $twilio = new Client(env('TWILLO_ID'), env('TWILLO_TOKEN'));
-        $message = $twilio->messages->create("whatsapp:".Auth::user()->phone,[
-            "from" => "whatsapp:+14155238886",
-            "body" => "Thank You for placing your order with FoodRocket."
-        ]);
-
         return response()->json(['success' => $orders], $this-> successStatus);
     }
 
@@ -60,6 +53,12 @@ class OrderController extends Controller
             $order->total = round($order->total + MenuItem::find($item->id)->price, 2);
         }
         $order->save();
+
+        $twilio = new Client(env('TWILLO_ID'), env('TWILLO_TOKEN'));
+        $message = $twilio->messages->create("whatsapp:".\Auth::user()->phone,[
+            "from" => "whatsapp:+14155238886",
+            "body" => "Thank You for placing your order with FoodRocket."
+        ]);
 
         return response()->json(['success' => $order], $this-> successStatus);
     }
