@@ -6,6 +6,7 @@ use App\MenuItem;
 use App\Order;
 use App\OrderItem;
 use Illuminate\Http\Request;
+use Twilio\Rest\Client;
 
 class OrderController extends Controller
 {
@@ -52,6 +53,12 @@ class OrderController extends Controller
             $order->total = round($order->total + MenuItem::find($item->id)->price, 2);
         }
         $order->save();
+
+        $twilio = new Client(env('TWILLO_ID'), env('TWILLO_TOKEN'));
+        $message = $twilio->messages->create("whatsapp:".\Auth::user()->phone,[
+            "from" => "whatsapp:+14155238886",
+            "body" => "Thank You for placing your order with FoodRocket."
+        ]);
 
         return response()->json(['success' => $order], $this-> successStatus);
     }
