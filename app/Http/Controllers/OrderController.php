@@ -18,8 +18,11 @@ class OrderController extends Controller
      */
     public function index()
     {
-        // TODO
-        dd("Index");
+        $orders = Order::where('user_id', \Auth::user()->id)->get();
+        foreach ($orders as $order) {
+            $order->items = OrderItem::where('order_id', $order->id)->get();
+        }
+        return response()->json(['success' => $orders], $this-> successStatus);
     }
 
     /**
@@ -49,7 +52,7 @@ class OrderController extends Controller
             $order->total = round($order->total + MenuItem::find($item->id)->price, 2);
         }
         $order->save();
-        
+
         return response()->json(['success' => $order], $this-> successStatus);
     }
 
