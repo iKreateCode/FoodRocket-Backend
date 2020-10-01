@@ -18,11 +18,11 @@ Route::prefix('v1')->group(function () {
     Route::post('user/register', 'API\UserController@register');
 
     Route::resource('menu', 'MenuController')->except([
-        'create', 'store', 'edit', 'update', 'destroy'
+        'edit', 'update', 'destroy'
     ]);
 
     Route::resource('offers', 'OfferController')->except([
-            'create', 'store', 'show', 'edit', 'update', 'destroy'
+        'create', 'store', 'show', 'edit', 'update', 'destroy'
     ]);
 
     Route::group(['middleware' => 'auth:api'], function() {
