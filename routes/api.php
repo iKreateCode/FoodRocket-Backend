@@ -18,7 +18,7 @@ Route::prefix('v1')->group(function () {
     Route::post('user/register', 'API\UserController@register');
 
     Route::resource('menu', 'MenuController')->except([
-        'create', 'store', 'show', 'edit', 'update', 'destroy'
+        'create', 'store', 'edit', 'update', 'destroy'
     ]);
 
     Route::resource('offers', 'OfferController')->except([
