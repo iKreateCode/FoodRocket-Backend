@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\MenuItem;
 use Illuminate\Http\Request;
+use Validator;
 
 class MenuController extends Controller
 {
@@ -27,7 +28,19 @@ class MenuController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|min:3|max:32',
+            'description' => 'required|min:10|max:256',
+            'category_id' => 'required|exists:menu_items,id',
+            'price' => 'required',
+            'image_url' => 'required|url',
+        ]);
+
+        if ($validator->fails()) return response()->json(['error'=>$validator->errors()], 401);
+
+        $item = MenuItem::create($request->all());
+
+        return response()->json(['success'=>$item], $this-> successStatus);
     }
 
     /**
@@ -38,7 +51,8 @@ class MenuController extends Controller
      */
     public function show($id)
     {
-        //
+        $item = MenuItem::find($id);
+        return response()->json(['success' => $item], $this-> successStatus);
     }
 
     /**
